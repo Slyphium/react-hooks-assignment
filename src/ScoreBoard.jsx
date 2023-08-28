@@ -2,8 +2,18 @@ import { useRef, useState } from "react";
 //Bootstrap has already been downloaded for you
 import "bootstrap/dist/css/bootstrap.min.css";
 import Player from "./Player";
+
 function ScoreBoard() {
- 
+ let [players, setPlayers] = useState([]);
+ let [input, setInput] = useState("");
+ function handleInputChange(event) {
+  setInput = (event.target.value);
+ }
+ function addplayer() {
+  let newplayer = {id:Date.now, name: input}
+  setPlayers([...players, newplayer]);
+  setinput("");
+ }
   return (
     <div className="container">
       <div className="row  text-center">
@@ -20,12 +30,14 @@ function ScoreBoard() {
               aria-label="New Player Name"
               aria-describedby="addPlayer"
               required
+              onChange = {handleInputChange}
             />
             {/* add Add Player event handling to this button */}
             <button
               class="btn btn-outline-primary"
               type="button"
               id="addPlayer"
+              onClick = {addplayer}
             >
               Add Player
             </button>
